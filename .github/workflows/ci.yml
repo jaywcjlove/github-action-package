@@ -22,7 +22,7 @@ jobs:
         uses: jaywcjlove/markdown-to-html-cli@main
         with:
           output: build/index.html
-          github-corners: https://github.com/jaywcjlove/create-tag-action
+          github-corners: https://github.com/jaywcjlove/github-action-package
           favicon: data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏷️</text></svg>
 
       - name: Generate Contributors Images
@@ -30,6 +30,12 @@ jobs:
         with:
           filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
           output: ./build/CONTRIBUTORS.svg
+
+      - name: Create Tag
+        id: create_tag
+        uses: jaywcjlove/create-tag-action@v1.3.7
+        with:
+          package-path: ./core/package.json
       
       - name: get tag version
         id: tag_version
