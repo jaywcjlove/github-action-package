@@ -56,3 +56,23 @@ jobs:
       - run: echo "repository - ${{ steps.info.outputs.repository }}"
       - run: echo "os - ${{ steps.info.outputs.os }}"
       - run: echo "cpu - ${{ steps.info.outputs.cpu }}"
+
+      - name: package.json info
+        id: info2
+        uses: ./
+        with:
+          data: |
+            {
+              "name": "@jaywcjlove/github-action-package-test"
+            }
+
+      - run: echo "name - ${{ steps.info.outputs.name }}"
+      - run: echo "version - ${{ steps.info.outputs.version }}"
+      - run: echo "description - ${{ steps.info.outputs.description }}"
+      - run: echo "author - ${{ steps.info.outputs.author }}"
+      - run: echo "homepage - ${{ steps.info.outputs.homepage }}"
+      - run: echo "license - ${{ steps.info.outputs.license }}"
+      - run: echo "keywords - ${{ steps.info.outputs.keywords }}"
+      - run: echo "repository - ${{ steps.info.outputs.repository }}"
+      - run: echo "os - ${{ steps.info.outputs.os }}"
+      - run: echo "cpu - ${{ steps.info.outputs.cpu }}"

@@ -1,6 +1,8 @@
 github-action-package
 ===
 
+[![CI](https://github.com/jaywcjlove/github-action-package/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/github-action-package/actions/workflows/ci.yml)
+
 Read and modify the contents of `package.json`.
 
 ## Example Usage
@@ -16,9 +18,26 @@ Read and modify the contents of `package.json`.
 - run: echo "author - ${{ steps.info.outputs.author }}"
 ```
 
+```yaml
+- name: package.json info
+  id: info
+  uses: jaywcjlove/github-action-package@main
+  with:
+    data: |
+      {
+        "name": "@jaywcjlove/github-action-package-test"
+      }
+
+- run: echo "name - ${{ steps.info.outputs.name }}"
+- run: echo "version - ${{ steps.info.outputs.version }}"
+- run: echo "description - ${{ steps.info.outputs.description }}"
+- run: echo "author - ${{ steps.info.outputs.author }}"
+```
+
 ## Inputs
 
 - `path` The path of the `package.json` file.  Default: `package.json`
+- `data` json data for changing `package.json`.  Default: `{}`
 
 ### Output Parameters
 

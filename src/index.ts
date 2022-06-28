@@ -5,6 +5,7 @@ import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@act
 ;(async () => {
   try {
     const pkgPath = getInput('path');
+    const data = getInput('data');
     const resolvePath = path.resolve(process.cwd(), pkgPath);
 
     if (!fs.existsSync(resolvePath)) {
@@ -12,7 +13,12 @@ import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@act
     }
 
     const jsonStr = await (await fs.promises.readFile(resolvePath)).toString();
-    const jsonObj = JSON.parse(jsonStr);
+    let jsonObj = JSON.parse(jsonStr);
+    if (data) {
+      const newData = JSON.parse(data);
+      jsonObj = Object.assign(jsonObj, newData);
+      await fs.promises.writeFile(resolvePath, JSON.stringify(jsonObj, null, 2));
+    }
 
     startGroup(`\x1b[32;1m package.json\x1b[0m content: `);
     info(`${JSON.stringify(jsonObj, null, 2)}`);
