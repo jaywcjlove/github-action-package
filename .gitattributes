@@ -1,2 +1,3 @@
 dist/** -diff linguist-generated=true 
 lib/** -diff linguist-generated=true 
+.husky/** -diff linguist-generated=true 
