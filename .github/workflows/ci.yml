@@ -46,16 +46,16 @@ jobs:
         id: info
         uses: ./
 
-      - run: echo "name - \x1b[32;1m ${{ steps.info.outputs.name }}\x1b[0m"
-      - run: echo "version - \x1b[32;1m ${{ steps.info.outputs.version }}\x1b[0m"
-      - run: echo "description - \x1b[32;1m ${{ steps.info.outputs.description }}\x1b[0m"
-      - run: echo "author - \x1b[32;1m ${{ steps.info.outputs.author }}\x1b[0m"
-      - run: echo "homepage - \x1b[32;1m ${{ steps.info.outputs.homepage }}\x1b[0m"
-      - run: echo "license - \x1b[32;1m ${{ steps.info.outputs.license }}\x1b[0m"
-      - run: echo "keywords - \x1b[32;1m ${{ steps.info.outputs.keywords }}\x1b[0m"
-      - run: echo "repository - \x1b[32;1m ${{ steps.info.outputs.repository }}\x1b[0m"
-      - run: echo "os - \x1b[32;1m ${{ steps.info.outputs.os }}\x1b[0m"
-      - run: echo "cpu - \x1b[32;1m ${{ steps.info.outputs.cpu }}\x1b[0m"
+      - run: echo "name - ${{ steps.info.outputs.name }}"
+      - run: echo "version - ${{ steps.info.outputs.version }}"
+      - run: echo "description - ${{ steps.info.outputs.description }}"
+      - run: echo "author - ${{ steps.info.outputs.author }}"
+      - run: echo "homepage - ${{ steps.info.outputs.homepage }}"
+      - run: echo "license - ${{ steps.info.outputs.license }}"
+      - run: echo "keywords - ${{ steps.info.outputs.keywords }}"
+      - run: echo "repository - ${{ steps.info.outputs.repository }}"
+      - run: echo "os - ${{ steps.info.outputs.os }}"
+      - run: echo "cpu - ${{ steps.info.outputs.cpu }}"
 
       - name: package.json info
         id: info2
@@ -66,13 +66,61 @@ jobs:
               "name": "@jaywcjlove/github-action-package-test"
             }
 
-      - run: echo "name - \x1b[32;1m ${{ steps.info2.outputs.name }}\x1b[0m"
-      - run: echo "version - \x1b[32;1m ${{ steps.info2.outputs.version }}\x1b[0m"
-      - run: echo "description - \x1b[32;1m ${{ steps.info2.outputs.description }}\x1b[0m"
-      - run: echo "author - \x1b[32;1m ${{ steps.info2.outputs.author }}\x1b[0m"
-      - run: echo "homepage - \x1b[32;1m ${{ steps.info2.outputs.homepage }}\x1b[0m"
-      - run: echo "license - \x1b[32;1m ${{ steps.info2.outputs.license }}\x1b[0m"
-      - run: echo "keywords - \x1b[32;1m ${{ steps.info2.outputs.keywords }}\x1b[0m"
-      - run: echo "repository - \x1b[32;1m ${{ steps.info2.outputs.repository }}\x1b[0m"
-      - run: echo "os - \x1b[32;1m ${{ steps.info2.outputs.os }}\x1b[0m"
-      - run: echo "cpu - \x1b[32;1m ${{ steps.info2.outputs.cpu }}\x1b[0m"
+      - run: echo "name - ${{ steps.info2.outputs.name }}"
+      - run: echo "version - ${{ steps.info2.outputs.version }}"
+      - run: echo "description - ${{ steps.info2.outputs.description }}"
+      - run: echo "author - ${{ steps.info2.outputs.author }}"
+      - run: echo "homepage - ${{ steps.info2.outputs.homepage }}"
+      - run: echo "license - ${{ steps.info2.outputs.license }}"
+      - run: echo "keywords - ${{ steps.info2.outputs.keywords }}"
+      - run: echo "repository - ${{ steps.info2.outputs.repository }}"
+      - run: echo "os - ${{ steps.info2.outputs.os }}"
+      - run: echo "cpu - ${{ steps.info2.outputs.cpu }}"
+
+      - name: Generate Changelog
+        id: changelog
+        uses: jaywcjlove/changelog-generator@v1.5.7
+        with:
+          head-ref: ${{steps.create_tag.outputs.version}}
+          filter-author: (renovate-bot|Renovate Bot)
+          filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        if: steps.create_tag.outputs.successful
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ steps.create_tag.outputs.version }}
+          tag: ${{ steps.create_tag.outputs.version }}
+          body: |
+            Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/jaywcjlove/github-action-package/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html  
+            Comparing Changes: ${{ steps.changelog.outputs.compareurl }}  
+
+            ```yaml
+            - name: package.json info
+              id: info
+              uses: jaywcjlove/github-action-package@main
+
+            - run: echo "name - ${{ steps.info.outputs.name }}"
+            - run: echo "version - ${{ steps.info.outputs.version }}"
+            - run: echo "description - ${{ steps.info.outputs.description }}"
+            - run: echo "author - ${{ steps.info.outputs.author }}"
+            ```
+
+            ```yaml
+            - name: package.json info
+              id: info
+              uses: jaywcjlove/github-action-package@main
+              with:
+                data: |
+                  {
+                    "name": "@jaywcjlove/github-action-package-test"
+                  }
+
+            - run: echo "name - ${{ steps.info.outputs.name }}"
+            - run: echo "version - ${{ steps.info.outputs.version }}"
+            - run: echo "description - ${{ steps.info.outputs.description }}"
+            - run: echo "author - ${{ steps.info.outputs.author }}"
+            ```
+
+            ${{ steps.changelog.outputs.changelog }}
