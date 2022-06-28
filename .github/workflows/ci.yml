@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install
+      - run: npm run build
+      
+      - name: package.json info
+        id: info
+        uses: ./
+
+      - run: echo "name - ${{ steps.info.outputs.name }}"
+      - run: echo "version - ${{ steps.info.outputs.version }}"
+      - run: echo "description - ${{ steps.info.outputs.description }}"
+      - run: echo "author - ${{ steps.info.outputs.author }}"
+      - run: echo "homepage - ${{ steps.info.outputs.homepage }}"
+      - run: echo "license - ${{ steps.info.outputs.license }}"
+      - run: echo "keywords - ${{ steps.info.outputs.keywords }}"
+      - run: echo "repository - ${{ steps.info.outputs.repository }}"
+      - run: echo "os - ${{ steps.info.outputs.os }}"
+      - run: echo "cpu - ${{ steps.info.outputs.cpu }}"

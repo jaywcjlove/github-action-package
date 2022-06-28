@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "github-action-package",
   "version": "1.0.0",
   "description": "Read and modify the contents of package.json.",

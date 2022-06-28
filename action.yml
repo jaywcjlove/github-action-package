@@ -7,9 +7,33 @@ inputs:
     default: ${{ github.token }}
     required: false
 
+  path:
+    description: The path of the target file "package.json".
+    default: package.json
+    required: false
+
 outputs:
-  svg:
-    description: 'svg image string'
+  name:
+    description: 'name field in package.json, The name of the package.'
+  version:
+    description: 'version field in package.json, Version must be parseable by node-semver, which is bundled with npm as a dependency.'
+  description:
+    description: "description field in package.json, This helps people discover your package, as it's listed in 'npm search'."
+  author:
+    description: 'author field in package.json'
+  homepage:
+    description: 'homepage field in package.json, The url to the project homepage.'
+  license:
+    description: "license field in package.json, You should specify a license for your package so that people know how they are permitted to use it, and any restrictions you're placing on it."
+  keywords:
+    description: "keywords field in package.json, This helps people discover your package as it's listed in 'npm search'."
+  repository:
+    description: "keywords field in package.json, Specify the place where your code lives. This is helpful for people who want to contribute."
+  os:
+    description: "os field in package.json, Specify which operating systems your module will run on."
+  cpu:
+    description: "cpu field in package.json, Specify that your code only runs on certain cpu architectures."
+
 runs:
   using: 'node12'
   main: 'lib/index.js'
