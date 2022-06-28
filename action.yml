@@ -1,0 +1,19 @@
+name: 'Read & Modify of package.json'
+author: 'Kenny Wong'
+description: 'Read and modify the contents of package.json.'
+inputs:
+  token:
+    description: 'Your GITHUB_TOKEN'
+    default: ${{ github.token }}
+    required: false
+
+outputs:
+  svg:
+    description: 'svg image string'
+runs:
+  using: 'node12'
+  main: 'lib/index.js'
+
+branding:
+  icon: 'list'
+  color: 'blue'
