@@ -47,11 +47,13 @@ Read and modify the contents of `package.json`.
 - `version` Version must be parseable by node-semver, which is bundled with npm as a dependency.
 - `homepage` The url to the project homepage.
 - `author` author field in package.json
+- `private` private field in package.json
 - `license` You should specify a license for your package so that people know how they are permitted to use it, and any restrictions you're placing on it.
 - `author` This helps people discover your package as it's listed in 'npm search'.
 - `keywords` This helps people discover your package as it's listed in 'npm search'.
 - `repository` Specify the place where your code lives. This is helpful for people who want to contribute.
 - `os` Specify which operating systems your module will run on.
+- `cpu` cpu field in package.json
 
 ## See Also
 

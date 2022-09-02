@@ -33,6 +33,8 @@ outputs:
     description: 'homepage field in package.json, The url to the project homepage.'
   license:
     description: "license field in package.json, You should specify a license for your package so that people know how they are permitted to use it, and any restrictions you're placing on it."
+  private:
+    description: "private field in package.json"
   keywords:
     description: "keywords field in package.json, This helps people discover your package as it's listed in 'npm search'."
   repository:

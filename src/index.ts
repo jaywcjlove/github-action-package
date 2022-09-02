@@ -30,15 +30,25 @@ import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@act
     info(`${JSON.stringify(jsonObj, null, 2)}`);
     endGroup();
 
-    setOutput('name', jsonObj.name);
-    setOutput('version', jsonObj.version);
-    setOutput('description', jsonObj.description);
+    Object.keys(jsonObj).forEach((keyname) => {
+      const value = jsonObj[keyname];
+      if (typeof value === 'string' || typeof value === 'boolean') {
+        setOutput(keyname, value);
+      } else if (Array.isArray(value)) {
+        setOutput(keyname, value.join(','));
+      }
+    });
+
+    // setOutput('name', jsonObj.name);
+    // setOutput('version', jsonObj.version);
+    // setOutput('description', jsonObj.description);
+    // setOutput('keywords', (jsonObj.keywords || []).join(','));
+    // setOutput('license', jsonObj.license);
+    // setOutput('homepage', jsonObj.homepage);
+    // setOutput('os', (jsonObj.os || []).join(','));
+
     setOutput('author', (jsonObj.author || {}).name || jsonObj.author);
-    setOutput('keywords', (jsonObj.keywords || []).join(','));
-    setOutput('license', jsonObj.license);
-    setOutput('homepage', jsonObj.homepage);
     setOutput('repository', (jsonObj.repository || {}).url || jsonObj.repository);
-    setOutput('os', (jsonObj.os || []).join(','));
 
   } catch (error) {
     setFailed(error.message);
