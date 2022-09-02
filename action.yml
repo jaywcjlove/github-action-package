@@ -16,6 +16,10 @@ inputs:
     description: json data for changing "package.json".
     required: false
 
+  rename:
+    description: Used to change "name" data in "package.json".
+    required: false
+
 outputs:
   name:
     description: 'name field in package.json, The name of the package.'

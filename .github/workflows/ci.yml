@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -33,13 +33,13 @@ jobs:
 
       - name: Create Tag
         id: create_tag
-        uses: jaywcjlove/create-tag-action@v1.3.7
+        uses: jaywcjlove/create-tag-action@main
         with:
           package-path: ./package.json
       
       - name: get tag version
         id: tag_version
-        uses: jaywcjlove/changelog-generator@v1.5.7
+        uses: jaywcjlove/changelog-generator@main
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -67,10 +67,11 @@ jobs:
         id: info2
         uses: ./
         with:
-          data: |
-            {
-              "name": "@jaywcjlove/github-action-package-test"
-            }
+          rename: "@jaywcjlove/github-action-package-test"
+          # data: |
+          #   {
+          #     "name": "@jaywcjlove/github-action-package-test"
+          #   }
 
       - run: echo "name - ${{ steps.info2.outputs.name }}"
       - run: echo "version - ${{ steps.info2.outputs.version }}"

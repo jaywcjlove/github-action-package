@@ -38,6 +38,7 @@ Read and modify the contents of `package.json`.
 
 - `path` The path of the `package.json` file.  Default: `package.json`
 - `data` json data for changing `package.json`.  Default: `{}`
+- `rename` Used to change "name" data in "package.json".
 
 ### Output Parameters
 
