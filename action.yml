@@ -45,7 +45,7 @@ outputs:
     description: "cpu field in package.json, Specify that your code only runs on certain cpu architectures."
 
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'lib/index.js'
 
 branding:
