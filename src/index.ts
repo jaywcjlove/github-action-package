@@ -7,6 +7,8 @@ import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@act
     const pkgPath = getInput('path');
     const data = getInput('data');
     const rename = getInput('rename');
+    const version = getInput('version');
+    const description = getInput('description');
     const resolvePath = path.resolve(process.cwd(), pkgPath);
 
     if (!fs.existsSync(resolvePath)) {
@@ -18,13 +20,17 @@ import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@act
     if (data) {
       const newData = JSON.parse(data);
       jsonObj = Object.assign(jsonObj, newData);
-      await fs.promises.writeFile(resolvePath, JSON.stringify(jsonObj, null, 2));
     }
-
     if (rename) {
       jsonObj = Object.assign(jsonObj, { name: rename });
-      await fs.promises.writeFile(resolvePath, JSON.stringify(jsonObj, null, 2));
     }
+    if (version) {
+      jsonObj = Object.assign(jsonObj, { name: version });
+    }
+    if (description) {
+      jsonObj = Object.assign(jsonObj, { name: description });
+    }
+    await fs.promises.writeFile(resolvePath, JSON.stringify(jsonObj, null, 2));
 
     startGroup(`\x1b[32;1m package.json\x1b[0m content: `);
     info(`${JSON.stringify(jsonObj, null, 2)}`);

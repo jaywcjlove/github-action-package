@@ -20,6 +20,14 @@ inputs:
     description: Used to change "name" data in "package.json".
     required: false
 
+  version:
+    description: Used to change "`version`" data in "package.json".
+    required: false
+
+  description:
+    description: Used to change "`description`" data in "package.json".
+    required: false
+
 outputs:
   name:
     description: 'name field in package.json, The name of the package.'

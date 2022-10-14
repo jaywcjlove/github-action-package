@@ -34,11 +34,26 @@ Read and modify the contents of `package.json`.
 - run: echo "author - ${{ steps.info.outputs.author }}"
 ```
 
+```yaml
+- name: package.json info
+  id: info
+  uses: jaywcjlove/github-action-package@main
+  with:
+    rename: '@jaywcjlove/github-action-package-test'
+
+- run: echo "name - ${{ steps.info.outputs.name }}"
+- run: echo "version - ${{ steps.info.outputs.version }}"
+- run: echo "description - ${{ steps.info.outputs.description }}"
+- run: echo "author - ${{ steps.info.outputs.author }}"
+```
+
 ## Inputs
 
 - `path` The path of the `package.json` file.  Default: `package.json`
 - `data` json data for changing `package.json`.  Default: `{}`
 - `rename` Used to change "name" data in "package.json".
+- `version` Used to change "`version`" data in "package.json".
+- `description` Used to change "`description`" data in "package.json".
 
 ### Output Parameters
 
