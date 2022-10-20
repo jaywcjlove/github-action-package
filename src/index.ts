@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import { setFailed, saveState, getInput, info, startGroup, endGroup } from '@actions/core';
+import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@actions/core';
 
 ;(async () => {
   try {
@@ -39,22 +39,22 @@ import { setFailed, saveState, getInput, info, startGroup, endGroup } from '@act
     Object.keys(jsonObj).forEach((keyname) => {
       const value = jsonObj[keyname];
       if (typeof value === 'string' || typeof value === 'boolean') {
-        saveState(keyname, value);
+        setOutput(keyname, value);
       } else if (Array.isArray(value)) {
-        saveState(keyname, value.join(','));
+        setOutput(keyname, value.join(','));
       }
     });
 
-    // saveState('name', jsonObj.name);
-    // saveState('version', jsonObj.version);
-    // saveState('description', jsonObj.description);
-    // saveState('keywords', (jsonObj.keywords || []).join(','));
-    // saveState('license', jsonObj.license);
-    // saveState('homepage', jsonObj.homepage);
-    // saveState('os', (jsonObj.os || []).join(','));
+    // setOutput('name', jsonObj.name);
+    // setOutput('version', jsonObj.version);
+    // setOutput('description', jsonObj.description);
+    // setOutput('keywords', (jsonObj.keywords || []).join(','));
+    // setOutput('license', jsonObj.license);
+    // setOutput('homepage', jsonObj.homepage);
+    // setOutput('os', (jsonObj.os || []).join(','));
 
-    saveState('author', (jsonObj.author || {}).name || jsonObj.author);
-    saveState('repository', (jsonObj.repository || {}).url || jsonObj.repository);
+    setOutput('author', (jsonObj.author || {}).name || jsonObj.author);
+    setOutput('repository', (jsonObj.repository || {}).url || jsonObj.repository);
 
   } catch (error) {
     setFailed(error.message);
