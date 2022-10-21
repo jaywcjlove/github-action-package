@@ -25,10 +25,10 @@ import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@act
       jsonObj = Object.assign(jsonObj, { name: rename });
     }
     if (version) {
-      jsonObj = Object.assign(jsonObj, { name: version });
+      jsonObj = Object.assign(jsonObj, { version });
     }
     if (description) {
-      jsonObj = Object.assign(jsonObj, { name: description });
+      jsonObj = Object.assign(jsonObj, { description });
     }
     await fs.promises.writeFile(resolvePath, JSON.stringify(jsonObj, null, 2));
 
