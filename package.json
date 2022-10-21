@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "github-action-package",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Read and modify the contents of package.json.",
   "scripts": {
     "prepare": "husky install && npm run build",
