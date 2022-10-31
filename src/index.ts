@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@actions/core';
-import removeValue from 'unset-value';
+import { unsetValue } from './unset-value';
 
 ;(async () => {
   try {
@@ -38,7 +38,7 @@ import removeValue from 'unset-value';
         startGroup(`👉 \x1b[32;1m ${item}\x1b[0m content: `);
           info(`${JSON.stringify(jsonObj, null, 2)}`);
         endGroup();
-        removeValue(jsonObj, item.trim())
+        unsetValue(jsonObj, item.trim())
       });
     }
     await fs.promises.writeFile(resolvePath, JSON.stringify(jsonObj, null, 2));
