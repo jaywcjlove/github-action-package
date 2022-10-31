@@ -47,6 +47,40 @@ Read and modify the contents of `package.json`.
 - run: echo "author - ${{ steps.info.outputs.author }}"
 ```
 
+### delete nested values
+
+```json
+{
+  "name": "github-action-package",
+  "author": "jaywcjlove",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaywcjlove/github-action-package"
+  },
+  "keywords": [
+    "actions",
+    "package"
+  ]
+}
+```
+
+```yml
+- name: package.json info
+  uses: jaywcjlove/github-action-package@main
+  with:
+    unset: repository.type,repository.url,keywords
+```
+
+Output:
+
+```json
+{
+  "name": "github-action-package",
+  "author": "jaywcjlove",
+  "repository": {}
+}
+```
+
 ## Inputs
 
 - `path` The path of the `package.json` file.  Default: `package.json`
@@ -54,6 +88,7 @@ Read and modify the contents of `package.json`.
 - `rename` Used to change "name" data in "package.json".
 - `version` Used to change "`version`" data in "package.json".
 - `description` Used to change "`description`" data in "package.json".
+- `unset` delete "Object" nested values in "package.json".
 
 ### Output Parameters
 

@@ -28,6 +28,10 @@ inputs:
     description: Used to change "`description`" data in "package.json".
     required: false
 
+  unset:
+    description: delete "Object" nested values
+    required: false
+
 outputs:
   name:
     description: 'name field in package.json, The name of the package.'

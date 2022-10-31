@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@actions/core';
+import removeValue from 'unset-value';
 
 ;(async () => {
   try {
@@ -8,6 +9,7 @@ import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@act
     const data = getInput('data');
     const rename = getInput('rename');
     const version = getInput('version');
+    const unset = getInput('unset');
     const description = getInput('description');
     const resolvePath = path.resolve(process.cwd(), pkgPath);
 
@@ -29,6 +31,12 @@ import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@act
     }
     if (description) {
       jsonObj = Object.assign(jsonObj, { description });
+    }
+
+    if (unset && typeof unset === 'string') {
+      unset.split(',').forEach((item) => {
+        removeValue(jsonObj, item.trim())
+      });
     }
     await fs.promises.writeFile(resolvePath, JSON.stringify(jsonObj, null, 2));
 

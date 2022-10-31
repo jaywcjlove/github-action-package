@@ -28,7 +28,8 @@
     "setup"
   ],
   "dependencies": {
-    "@actions/core": "^1.10.0"
+    "@actions/core": "^1.10.0",
+    "unset-value": "^2.0.1"
   },
   "devDependencies": {
     "@kkt/ncc": "~1.0.12",

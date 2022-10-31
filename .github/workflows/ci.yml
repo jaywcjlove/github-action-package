@@ -84,6 +84,13 @@ jobs:
       - run: echo "os - ${{ steps.info2.outputs.os }}"
       - run: echo "cpu - ${{ steps.info2.outputs.cpu }}"
 
+      - name: delete nested values
+        uses: ./
+        with:
+          unset: scripts.watch,lint-staged,devDependencies
+
+      - run: cat package.json
+
       - name: Generate Changelog
         id: changelog
         uses: jaywcjlove/changelog-generator@main
