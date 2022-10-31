@@ -35,6 +35,7 @@ import removeValue from 'unset-value';
 
     if (unset && typeof unset === 'string') {
       unset.split(',').forEach((item) => {
+        info(`👉 ${item}`);
         removeValue(jsonObj, item.trim())
       });
     }
