@@ -1,6 +1,7 @@
 github-action-package
 ===
 
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-048754?logo=buymeacoffee)](https://jaywcjlove.github.io/#/sponsor)
 [![CI](https://github.com/jaywcjlove/github-action-package/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/github-action-package/actions/workflows/ci.yml)
 
 Read and modify the contents of `package.json`.
