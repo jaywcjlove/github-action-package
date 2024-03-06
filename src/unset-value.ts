@@ -1,5 +1,5 @@
 /**
- * https://www.npmjs.com/package/unset-values
+ * https://www.npmjs.com/package/unset-value
  */
 import has from 'has-value';
 import isObject from 'isobject';
